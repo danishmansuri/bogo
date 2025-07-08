@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOGO Offer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* {
+box-sizing: border-box;
+font-family: 'Inter', sans-serif;
+margin: 0;
+padding: 0;
+}
+body {
+background: #fff;
+padding: 20px;
+color: #333;
+}
+.container {
+max-width: 400px;
+margin: auto;
+border-radius: 8px;
+}
+h2 {
+text-align: center;
+color: #f06292;
+font-size: 24px;
+margin-bottom: 20px;
+}
+.option {
+border: 1px solid #ddd;
+border-radius: 10px;
+padding: 15px;
+margin-bottom: 20px;
+position: relative;
+}
+.option input[type="radio"] {
+margin-right: 10px;
+}
+.option.active {
+border: 2px solid #f06292;
+background: #fff0f5;
+}
+.discount {
+background: #f06292;
+color: #fff;
+font-size: 12px;
+padding: 3px 8px;
+border-radius: 10px;
+margin-left: 5px;
+}
+.most-popular {
+position: absolute;
+top: -10px;
+right: -10px;
+background: #f06292;
+color: white;
+padding: 5px 10px;
+font-size: 10px;
+font-weight: bold;
+border-radius: 5px;
+}
+.price-section {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 10px;
+}
+.old-price {
+text-decoration: line-through;
+color: #bbb;
+font-size: 14px;
+}
+.selectors {
+display: flex;
+gap: 10px;
+margin: 10px 0;
+}
+select {
+padding: 5px;
+border-radius: 5px;
+border: 1px solid #ccc;
+}
+.footer {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px 0;
+color: #f06292;
+font-weight: 600;
+}
+button {
+width: 100%;
+background: #f06292;
+border: none;
+padding: 15px;
+color: white;
+font-weight: bold;
+font-size: 16px;
+border-radius: 8px;
+cursor: pointer;
+}
+@media (max-width: 480px) {
+.selectors {
+flex-direction: column;
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>YAY! It's BOGO</h2>
+
+<div class="option active" data-units="1">
+<label>
+<input type="radio" name="unit" checked value="1">
+<strong>1 Unit</strong>
+<span class="discount">10% Off</span>
+</label>
+<div class="price-section">
+<div>Standard Price</div>
+<div><strong>$10.00 USD</strong> <span class="old-price">$24.00 USD</span></div>
+</div>
+</div>
+
+<div class="option" data-units="2">
+<div class="most-popular">MOST POPULAR</div>
+<label>
+<input type="radio" name="unit" value="2">
+<strong>2 Unit</strong>
+<span class="discount">20% Off</span>
+</label>
+<div class="price-section">
+<div></div>
+<div><strong>$18.00 USD</strong> <span class="old-price">$24.00 USD</span></div>
+</div>
+<div class="selectors">
+<select>
+<option>S</option>
+<option>M</option>
+<option>L</option>
+</select>
+<select>
+<option>Black</option>
+<option>White</option>
+<option>Blue</option>
+</select>
+</div>
+<div class="selectors">
+<select>
+<option>S</option>
+<option>M</option>
+<option>L</option>
+</select>
+<select>
+<option>Colour</option>
+<option>Black</option>
+<option>White</option>
+</select>
+</div>
+</div>
+
+<div class="option" data-units="3">
+<label>
+<input type="radio" name="unit" value="3">
+<strong>3 Unit</strong>
+<span class="discount">30% Off</span>
+</label>
+<div class="price-section">
+<div></div>
+<div><strong>$24.00 USD</strong> <span class="old-price">$24.00 USD</span></div>
+</div>
+</div>
+
+<div class="footer">
+<div>Free Delivery</div>
+<div>Total : <span id="total">$10.00 USD</span></div>
+</div>
+
+<button>+ Add to Cart</button>
+</div>
+
+<script>
+const options = document.querySelectorAll('.option');
+const radios = document.querySelectorAll('input[type="radio"][name="unit"]');
+const total = document.getElementById('total');
+
+const prices = {
+1: 10,
+2: 18,
+3: 24
+};
+
+radios.forEach(radio => {
+radio.addEventListener('change', (e) => {
+const selected = e.target.value;
+
+options.forEach(opt => opt.classList.remove('active'));
+document.querySelector(`.option[data-units="${selected}"]`).classList.add('active');
+
+total.textContent = `$${prices[selected].toFixed(2)} USD`;
+});
+});
+</script>
+</body>
+</html>
